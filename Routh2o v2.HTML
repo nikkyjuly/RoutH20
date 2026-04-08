@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROUTH2O — Ecossistema de Saúde Integrada</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --c:#00FFD1;--c2:#00C9A7;--c3:#00877A;
+  --b:#FF6B35;--b2:#FF8C5A;
+  --p:#7B5CF6;--p2:#A78BFA;
+  --navy:#030D18;--navy2:#061524;--navy3:#0B2035;--navy4:#0F2D47;
+  --txt:#C8ECF5;--muted:#5A8FA8;--white:#F0FAFF;
+  --grad1:linear-gradient(135deg,#00FFD1,#7B5CF6);
+  --grad2:linear-gradient(135deg,#FF6B35,#FF3CAC);
+  --grad3:linear-gradient(135deg,#00C9A7,#0077FF);
+}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--txt);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(3,13,24,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,255,209,.1)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:.1em;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--c)}
+.nav-cta{background:var(--grad1);border:none;padding:.55rem 1.5rem;border-radius:2rem;font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.08em;cursor:pointer;color:#030D18;transition:opacity .2s,transform .2s}
+.nav-cta:hover{opacity:.85;transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding:9rem 3rem 5rem;overflow:hidden}
+
+/* fundo animado */
+.hero-bg{position:absolute;inset:0;overflow:hidden}
+.hero-bg canvas{position:absolute;inset:0;width:100%;height:100%}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;animation:orbFloat 8s ease-in-out infinite}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,#00FFD1,transparent);top:-100px;left:-150px;animation-delay:0s}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,#7B5CF6,transparent);bottom:-80px;right:-100px;animation-delay:-3s}
+.orb3{width:350px;height:350px;background:radial-gradient(circle,#FF6B35,transparent);top:40%;left:60%;animation-delay:-5s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-30px) scale(1.08)}}
+
+/* grade */
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,209,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,209,.06) 1px,transparent 1px);background-size:50px 50px;animation:gridScroll 25s linear infinite}
+@keyframes gridScroll{0%{transform:translateY(0)}100%{transform:translateY(50px)}}
+
+.hero-inner{max-width:800px;text-align:center;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(0,255,209,.35);background:rgba(0,255,209,.08);padding:.4rem 1.1rem;border-radius:2rem;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--c);margin-bottom:2rem;animation:fadeUp .7s ease both}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--c);animation:blink 1.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3.2rem,9vw,7rem);line-height:.92;letter-spacing:-.03em;color:var(--white);margin-bottom:1.5rem;animation:fadeUp .7s .1s ease both}
+h1 .g1{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+h1 .sub{font-weight:300;font-style:italic;font-size:.45em;display:block;color:var(--muted);letter-spacing:.04em;margin-top:.3rem}
+
+.hero-desc{max-width:540px;margin:0 auto 2.5rem;font-size:1.1rem;line-height:1.8;color:var(--muted);animation:fadeUp .7s .2s ease both}
+
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .7s .3s ease both}
+.btn-primary{background:var(--grad1);border:none;padding:1rem 2.4rem;border-radius:2rem;font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:.06em;cursor:pointer;color:#030D18;transition:all .25s;box-shadow:0 0 30px rgba(0,255,209,.25)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(0,255,209,.4)}
+.btn-ghost{background:transparent;color:var(--txt);border:1px solid rgba(200,236,245,.2);padding:1rem 2.4rem;border-radius:2rem;font-family:'Syne',sans-serif;font-size:.9rem;letter-spacing:.06em;cursor:pointer;transition:all .25s}
+.btn-ghost:hover{border-color:var(--c);color:var(--c);box-shadow:0 0 20px rgba(0,255,209,.15)}
+
+/* hero ilustração */
+.hero-visual{position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:380px;opacity:.25;z-index:1;animation:floatY 6s ease-in-out infinite}
+@keyframes floatY{0%,100%{transform:translateY(-50%) translateX(0)}50%{transform:translateY(calc(-50% - 20px)) translateX(-10px)}}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── STRIP DE MÉTRICAS ── */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);background:var(--navy2);border-top:1px solid rgba(0,255,209,.12);border-bottom:1px solid rgba(0,255,209,.12)}
+.metric{padding:2.2rem 1.5rem;text-align:center;border-right:1px solid rgba(0,255,209,.08);position:relative;overflow:hidden;transition:background .3s}
+.metric:last-child{border-right:none}
+.metric:hover{background:rgba(0,255,209,.04)}
+.metric::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--grad1);transform:scaleX(0);transition:transform .4s;transform-origin:left}
+.metric:hover::before{transform:scaleX(1)}
+.metric-num{font-family:'Syne',sans-serif;font-size:2.6rem;font-weight:800;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;line-height:1}
+.metric-label{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.4rem}
+
+/* ── SEÇÃO BASE ── */
+.section{padding:7rem 3rem;max-width:1200px;margin:0 auto}
+.section-tag{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--c);margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem}
+.section-tag::before{content:'';display:inline-block;width:20px;height:2px;background:var(--grad1);border-radius:1px}
+h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.02;color:var(--white);margin-bottom:1.2rem}
+h2 .g1{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+h2 .g2{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ── ECOSSISTEMA ── */
+.eco-wrap{background:var(--navy2);border:1px solid rgba(0,255,209,.12);border-radius:2rem;padding:4rem;margin-top:4rem;position:relative;overflow:hidden}
+.eco-wrap::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(0,255,209,.07) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+
+/* ilustrações SVG inline no ecossistema */
+.eco-layout{display:grid;grid-template-columns:1fr 200px 1fr;gap:3rem;align-items:center;position:relative;z-index:2}
+.eco-col{display:flex;flex-direction:column;gap:1.5rem}
+.eco-card{background:var(--navy3);border:1px solid rgba(0,255,209,.1);border-radius:1.2rem;padding:1.5rem;transition:all .3s;position:relative;overflow:hidden}
+.eco-card::before{content:'';position:absolute;inset:0;background:var(--grad1);opacity:0;transition:opacity .3s;border-radius:inherit}
+.eco-card:hover{border-color:rgba(0,255,209,.4);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.eco-card:hover::before{opacity:.04}
+.eco-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.4rem}
+.eco-icon-gps{background:linear-gradient(135deg,#00FFD1,#0077FF)}
+.eco-icon-temp{background:linear-gradient(135deg,#FF6B35,#FF3CAC)}
+.eco-icon-drop{background:linear-gradient(135deg,#0077FF,#7B5CF6)}
+.eco-icon-bio{background:linear-gradient(135deg,#7B5CF6,#FF3CAC)}
+.eco-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:.4rem}
+.eco-card p{font-size:.83rem;color:var(--muted);line-height:1.65}
+
+/* núcleo central */
+.eco-core-wrap{display:flex;flex-direction:column;align-items:center;gap:1rem;position:relative}
+.core-ring{width:140px;height:140px;border-radius:50%;border:2px solid var(--c);display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative;animation:pulsRing 3s ease-in-out infinite}
+.core-ring::before,.core-ring::after{content:'';position:absolute;border-radius:50%;border:1px solid rgba(0,255,209,.2);animation:expandRing 3s ease-in-out infinite}
+.core-ring::before{width:170px;height:170px;animation-delay:.5s}
+.core-ring::after{width:200px;height:200px;animation-delay:1s}
+@keyframes pulsRing{0%,100%{box-shadow:0 0 0 0 rgba(0,255,209,.4)}50%{box-shadow:0 0 0 15px rgba(0,255,209,0)}}
+@keyframes expandRing{0%,100%{opacity:.4}50%{opacity:.1}}
+.core-label{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.core-sub{font-size:.6rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-top:4px}
+.eco-arrow{font-size:1.3rem;color:rgba(0,255,209,.4);text-align:center}
+
+/* ── COMO FUNCIONA ── */
+.how-layout{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:4rem}
+.how-card{background:var(--navy2);border:1px solid rgba(0,255,209,.08);border-radius:1.5rem;padding:2rem 1.5rem;position:relative;overflow:hidden;transition:all .3s}
+.how-card:hover{border-color:rgba(0,255,209,.25);transform:translateY(-6px);box-shadow:0 25px 60px rgba(0,0,0,.5)}
+.step-n{font-family:'Syne',sans-serif;font-size:5rem;font-weight:800;color:rgba(0,255,209,.06);line-height:1;position:absolute;top:1rem;right:1rem}
+.step-pill{display:inline-block;background:rgba(0,255,209,.1);border:1px solid rgba(0,255,209,.2);color:var(--c);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:.25rem .8rem;border-radius:2rem;margin-bottom:1rem}
+.how-card h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:.7rem}
+.how-card p{font-size:.85rem;color:var(--muted);line-height:1.7}
+/* linha conectora entre steps */
+.how-connector{display:flex;align-items:center;justify-content:center;padding-top:5rem;color:rgba(0,255,209,.2);font-size:1.8rem}
+
+/* ── SEÇÃO VISUAL / ILUSTRAÇÃO ── */
+.visual-section{background:var(--navy2);padding:7rem 3rem;position:relative;overflow:hidden}
+.visual-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(0,255,209,.06) 0%,transparent 60%)}
+.visual-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.visual-text{position:relative;z-index:2}
+.visual-text p.body{color:var(--muted);font-size:1rem;line-height:1.85;margin-bottom:2rem}
+.feature-list{list-style:none;display:flex;flex-direction:column;gap:.9rem}
+.feature-list li{display:flex;align-items:flex-start;gap:.8rem;font-size:.9rem;color:var(--txt);line-height:1.5}
+.fi{width:22px;height:22px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;margin-top:1px}
+.fi-c{background:var(--c);color:#030D18}
+.visual-img{position:relative;z-index:2}
+
+/* ── APP MOCKUP ── */
+.phone-frame{width:300px;height:560px;background:var(--navy3);border-radius:3rem;border:2px solid rgba(0,255,209,.2);position:relative;overflow:hidden;margin:0 auto;box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 60px rgba(0,255,209,.1)}
+.phone-notch{width:100px;height:28px;background:var(--navy);border-radius:0 0 1rem 1rem;position:absolute;top:0;left:50%;transform:translateX(-50%)}
+.phone-screen{padding:2.5rem 1.2rem 1.2rem;height:100%;display:flex;flex-direction:column;gap:.8rem}
+.phone-header{display:flex;justify-content:space-between;align-items:center}
+.phone-logo{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.phone-status{font-size:.65rem;color:var(--c);letter-spacing:.1em}
+.map-area{background:var(--navy4);border-radius:1rem;flex:1;position:relative;overflow:hidden}
+
+/* mapa simulado com SVG inline */
+.map-svg{width:100%;height:100%}
+
+.data-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem}
+.data-chip{background:var(--navy4);border-radius:.8rem;padding:.6rem .5rem;text-align:center;border:1px solid rgba(0,255,209,.08)}
+.dc-val{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--c)}
+.dc-lab{font-size:.55rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:2px}
+.hydro-bar-wrap{background:var(--navy4);border-radius:.8rem;padding:.8rem}
+.hydro-label{display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted);margin-bottom:.4rem}
+.hydro-bar{height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden}
+.hydro-fill{height:100%;background:var(--grad1);border-radius:3px;width:68%;animation:fillBar 2s ease both 1s}
+@keyframes fillBar{from{width:0}to{width:68%}}
+.alert-chip{background:linear-gradient(135deg,rgba(0,255,209,.15),rgba(123,92,246,.15));border:1px solid rgba(0,255,209,.2);border-radius:.8rem;padding:.7rem;display:flex;align-items:center;gap:.6rem}
+.alert-dot{width:8px;height:8px;border-radius:50%;background:var(--c);flex-shrink:0;animation:blink 1.5s ease-in-out infinite}
+.alert-txt{font-size:.68rem;color:var(--txt);line-height:1.4}
+
+/* ── COMPARATIVO ── */
+.diff-bg{background:var(--navy2);padding:7rem 3rem;position:relative;overflow:hidden}
+.diff-bg::after{content:'';position:absolute;top:0;right:0;width:600px;height:100%;background:radial-gradient(ellipse at right,rgba(123,92,246,.08) 0%,transparent 60%);pointer-events:none}
+.diff-inner{max-width:1200px;margin:0 auto}
+.diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:4rem}
+.diff-card{background:var(--navy3);border-radius:1.5rem;padding:2.5rem;border:1px solid rgba(0,255,209,.08)}
+.diff-card.positive{border-color:rgba(0,255,209,.2);box-shadow:0 0 40px rgba(0,255,209,.06)}
+.diff-card-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:1.8rem;display:flex;align-items:center;gap:.6rem}
+.diff-card-title .badge{font-size:.65rem;padding:.25rem .6rem;border-radius:2rem;letter-spacing:.1em;text-transform:uppercase}
+.badge-pos{background:rgba(0,255,209,.15);color:var(--c);border:1px solid rgba(0,255,209,.25)}
+.badge-neg{background:rgba(90,143,168,.1);color:var(--muted);border:1px solid rgba(90,143,168,.2)}
+.comp-item{display:flex;align-items:flex-start;gap:.8rem;margin-bottom:1.2rem}
+.ci-icon{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;margin-top:2px}
+.ci-yes{background:var(--grad1);color:#030D18}
+.ci-no{background:rgba(90,143,168,.12);color:var(--muted)}
+.comp-item span{font-size:.88rem;color:var(--txt);line-height:1.55}
+
+/* ── CTA ── */
+.cta-wrap{text-align:center;padding:9rem 3rem;position:relative;overflow:hidden}
+.cta-wrap::before{content:'';position:absolute;width:900px;height:500px;background:radial-gradient(ellipse,rgba(0,255,209,.08) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.cta-wrap::after{content:'';position:absolute;width:600px;height:400px;background:radial-gradient(ellipse,rgba(123,92,246,.07) 0%,transparent 65%);top:40%;left:30%;transform:translate(-50%,-50%);pointer-events:none}
+.cta-wrap h2{position:relative;z-index:2;font-size:clamp(2.6rem,6vw,5rem)}
+.cta-wrap p{color:var(--muted);max-width:480px;margin:1.5rem auto 3rem;font-size:1.05rem;line-height:1.75;position:relative;z-index:2}
+.cta-wrap .hero-actions{position:relative;z-index:2}
+.cta-email{display:flex;gap:.6rem;max-width:440px;margin:0 auto 2rem;position:relative;z-index:2}
+.cta-email input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(0,255,209,.2);border-radius:2rem;padding:.9rem 1.5rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s}
+.cta-email input::placeholder{color:var(--muted)}
+.cta-email input:focus{border-color:var(--c)}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid rgba(0,255,209,.08);padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.foot-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.foot-copy{font-size:.78rem;color:var(--muted)}
+.foot-links{display:flex;gap:1.5rem}
+.foot-links a{font-size:.78rem;color:var(--muted);text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:var(--c)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* responsive */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .section{padding:5rem 1.5rem}
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .eco-layout{grid-template-columns:1fr}
+  .how-layout{grid-template-columns:1fr 1fr}
+  .visual-inner{grid-template-columns:1fr}
+  .diff-grid{grid-template-columns:1fr}
+  .hero{padding:8rem 1.5rem 4rem}
+  .hero-visual{display:none}
+}
+@media(max-width:600px){
+  .metrics{grid-template-columns:1fr 1fr}
+  .how-layout{grid-template-columns:1fr}
+  .cta-email{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="logo">ROUTH2O</div>
+  <ul class="nav-links">
+    <li><a href="#ecosystem">Ecossistema</a></li>
+    <li><a href="#app">Produto</a></li>
+    <li><a href="#diferencial">Diferenciais</a></li>
+  </ul>
+  <button class="nav-cta">Acesso antecipado</button>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+
+  <!-- ilustração decorativa (runner + GPS) -->
+  <div class="hero-visual" aria-hidden="true">
+    <svg viewBox="0 0 300 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- corpo do runner estilizado -->
+      <circle cx="150" cy="80" r="30" fill="none" stroke="#00FFD1" stroke-width="2"/>
+      <line x1="150" y1="110" x2="150" y2="240" stroke="#00FFD1" stroke-width="2"/>
+      <line x1="150" y1="150" x2="100" y2="200" stroke="#00FFD1" stroke-width="2"/>
+      <line x1="150" y1="150" x2="200" y2="180" stroke="#7B5CF6" stroke-width="2"/>
+      <line x1="150" y1="240" x2="110" y2="320" stroke="#00FFD1" stroke-width="2"/>
+      <line x1="150" y1="240" x2="185" y2="330" stroke="#7B5CF6" stroke-width="2"/>
+      <!-- ondas de sinal GPS -->
+      <circle cx="150" cy="80" r="55" fill="none" stroke="rgba(0,255,209,.25)" stroke-width="1" stroke-dasharray="4 6"/>
+      <circle cx="150" cy="80" r="85" fill="none" stroke="rgba(0,255,209,.12)" stroke-width="1" stroke-dasharray="4 8"/>
+      <circle cx="150" cy="80" r="115" fill="none" stroke="rgba(123,92,246,.1)" stroke-width="1" stroke-dasharray="3 10"/>
+      <!-- ponto GPS -->
+      <circle cx="150" cy="80" r="8" fill="#00FFD1" opacity=".9"/>
+      <circle cx="150" cy="80" r="4" fill="#030D18"/>
+      <!-- gotas de hidratação -->
+      <ellipse cx="60" cy="260" rx="14" ry="20" fill="rgba(0,119,255,.4)" stroke="#0077FF" stroke-width="1"/>
+      <ellipse cx="240" cy="300" rx="10" ry="15" fill="rgba(0,255,209,.25)" stroke="#00FFD1" stroke-width="1"/>
+      <ellipse cx="80" cy="380" rx="8" ry="12" fill="rgba(123,92,246,.3)" stroke="#7B5CF6" stroke-width="1"/>
+      <!-- rota no chão -->
+      <path d="M 50 450 Q 150 380 250 420 Q 280 440 250 470" stroke="rgba(0,255,209,.3)" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+      <!-- pontos de rota -->
+      <circle cx="50" cy="450" r="5" fill="#00FFD1" opacity=".7"/>
+      <circle cx="150" cy="390" r="4" fill="#7B5CF6" opacity=".7"/>
+      <circle cx="250" cy="420" r="5" fill="#FF6B35" opacity=".7"/>
+    </svg>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="hero-badge-dot"></span>GPS + Bio-Rastreamento em tempo real</div>
+    <h1>ROUTH<span class="g1">2O</span><span class="sub">Saúde que move com você</span></h1>
+    <p class="hero-desc">O único ecossistema que une monitoramento geográfico com bio-rastreamento — correlacionando em tempo real o terreno que você percorre com a necessidade metabólica do seu corpo.</p>
+    <div class="cta-email">
+      <input type="email" placeholder="seu@email.com">
+      <button class="btn-primary">Entrar na lista</button>
+    </div>
+    <div class="hero-actions">
+      <button class="btn-ghost">Ver como funciona →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MÉTRICAS ── -->
+<div class="metrics">
+  <div class="metric"><span class="metric-num">100%</span><span class="metric-label">Correlação dinâmica</span></div>
+  <div class="metric"><span class="metric-num">GPS</span><span class="metric-label">Monitoramento geográfico</span></div>
+  <div class="metric"><span class="metric-num">Bio</span><span class="metric-label">Rastreamento metabólico</span></div>
+  <div class="metric"><span class="metric-num">∞</span><span class="metric-label">Adaptação contínua</span></div>
+</div>
+
+<!-- ── ECOSSISTEMA ── -->
+<section class="section reveal" id="ecosystem">
+  <div class="section-tag">Ecossistema integrado</div>
+  <h2>Dois mundos,<br><span class="g1">uma inteligência</span></h2>
+  <p style="color:var(--muted);max-width:520px;line-height:1.8;margin-bottom:0">Não é um app de hidratação. Não é um rastreador de rota. É a ponte entre os dois — criando uma linguagem única entre seu corpo e o terreno.</p>
+
+  <div class="eco-wrap">
+    <div class="eco-layout">
+      <!-- col esquerda: inputs GPS -->
+      <div class="eco-col">
+        <div class="eco-card">
+          <div class="eco-icon eco-icon-gps">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" fill="white"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="8" stroke="white" stroke-width="1.5" stroke-dasharray="2 3"/></svg>
+          </div>
+          <h3>Mapeamento de rota</h3>
+          <p>Altitude, inclinação e distância em tempo real alimentam o algoritmo de cálculo hídrico.</p>
+        </div>
+        <div class="eco-card">
+          <div class="eco-icon eco-icon-temp">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="9" y="2" width="6" height="13" rx="3" stroke="white" stroke-width="1.5"/><circle cx="12" cy="18" r="4" fill="white" fill-opacity=".3" stroke="white" stroke-width="1.5"/><line x1="12" y1="15" x2="12" y2="18" stroke="white" stroke-width="2"/></svg>
+          </div>
+          <h3>Dados climáticos</h3>
+          <p>Temperatura e umidade integradas ao cálculo de perda hídrica a cada momento.</p>
+        </div>
+      </div>
+
+      <!-- núcleo -->
+      <div class="eco-core-wrap">
+        <div class="eco-arrow">⟵</div>
+        <div class="core-ring">
+          <span class="core-label">R2O</span>
+          <span class="core-sub">Engine</span>
+        </div>
+        <div class="eco-arrow">⟶</div>
+      </div>
+
+      <!-- col direita: outputs saúde -->
+      <div class="eco-col">
+        <div class="eco-card">
+          <div class="eco-icon eco-icon-drop">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 5 10 5 15a7 7 0 0014 0C19 10 12 2 12 2z" fill="white" fill-opacity=".2" stroke="white" stroke-width="1.5"/><path d="M9 15a3 3 0 006 0" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Hidratação dinâmica</h3>
+          <p>Metas e alertas ajustados em tempo real conforme a evolução da sua rota.</p>
+        </div>
+        <div class="eco-card">
+          <div class="eco-icon eco-icon-bio">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><polyline points="2,15 6,9 10,13 14,7 18,11 22,6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="6" r="2" fill="white" fill-opacity=".5"/></svg>
+          </div>
+          <h3>Bio-rastreamento</h3>
+          <p>Peso, condicionamento e histórico moldam cada recomendação do sistema.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMO FUNCIONA ── -->
+<section class="section reveal">
+  <div class="section-tag">Como funciona</div>
+  <h2>Da rota ao<br><span class="g1">gole certo</span></h2>
+  <div class="how-layout">
+    <div class="how-card">
+      <span class="step-n">01</span>
+      <div class="step-pill">GPS</div>
+      <h3>Você inicia sua rota</h3>
+      <p>O ROUTH2O mapeia altitude, inclinação e velocidade — analisando o terreno em tempo real desde o primeiro passo.</p>
+    </div>
+    <div class="how-card">
+      <span class="step-n">02</span>
+      <div class="step-pill">Cálculo</div>
+      <h3>O engine cruza os dados</h3>
+      <p>GPS + perfil metabólico + clima = demanda hídrica real do seu corpo naquele exato momento.</p>
+    </div>
+    <div class="how-card">
+      <span class="step-n">03</span>
+      <div class="step-pill">Alerta</div>
+      <h3>Recomendação precisa</h3>
+      <p>Não é "beba água agora". É quanto beber, quando beber, baseado em onde você está e o que seu corpo demanda.</p>
+    </div>
+    <div class="how-card">
+      <span class="step-n">04</span>
+      <div class="step-pill">Aprendizado</div>
+      <h3>O sistema evolui</h3>
+      <p>A cada rota concluída o ROUTH2O refina seu modelo pessoal, ficando mais preciso com o tempo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── APP VISUAL ── -->
+<div class="visual-section reveal" id="app">
+  <div class="visual-inner">
+    <div class="visual-text">
+      <div class="section-tag">O produto</div>
+      <h2>Inteligência<br><span class="g1">na palma da mão</span></h2>
+      <p class="body">O app ROUTH2O exibe em tempo real sua rota, dados metabólicos e recomendações de hidratação — tudo integrado em uma interface que pensa enquanto você corre.</p>
+      <ul class="feature-list">
+        <li><span class="fi fi-c">✓</span>Mapa com rota ativa e pontos de alerta</li>
+        <li><span class="fi fi-c">✓</span>Gráfico de demanda hídrica por trecho</li>
+        <li><span class="fi fi-c">✓</span>Alertas inteligentes contextualizados</li>
+        <li><span class="fi fi-c">✓</span>Dashboard de histórico e evolução</li>
+        <li><span class="fi fi-c">✓</span>Integração com wearables e sensores</li>
+      </ul>
+    </div>
+    <div class="visual-img">
+      <!-- mockup do celular -->
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-header">
+            <span class="phone-logo">ROUTH2O</span>
+            <span class="phone-status">● AO VIVO</span>
+          </div>
+
+          <!-- mapa simulado -->
+          <div class="map-area">
+            <svg class="map-svg" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+              <!-- fundo do mapa com quadrícula -->
+              <rect width="260" height="180" fill="#0B2035"/>
+              <!-- ruas simuladas -->
+              <line x1="0" y1="60" x2="260" y2="60" stroke="#0F2D47" stroke-width="8"/>
+              <line x1="0" y1="120" x2="260" y2="120" stroke="#0F2D47" stroke-width="6"/>
+              <line x1="80" y1="0" x2="80" y2="180" stroke="#0F2D47" stroke-width="6"/>
+              <line x1="180" y1="0" x2="180" y2="180" stroke="#0F2D47" stroke-width="8"/>
+              <line x1="130" y1="0" x2="130" y2="180" stroke="#0F2D47" stroke-width="4"/>
+              <!-- rota percorrida -->
+              <path d="M 30 150 Q 60 140 80 120 Q 100 100 130 90 Q 160 80 180 60 Q 200 45 220 40" stroke="#00FFD1" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <!-- rota futura (tracejada) -->
+              <path d="M 220 40 Q 240 30 250 20" stroke="rgba(0,255,209,.4)" stroke-width="2" fill="none" stroke-dasharray="4 3" stroke-linecap="round"/>
+              <!-- ponto de início -->
+              <circle cx="30" cy="150" r="6" fill="#FF6B35"/>
+              <circle cx="30" cy="150" r="10" fill="none" stroke="#FF6B35" stroke-width="1" opacity=".5"/>
+              <!-- posição atual -->
+              <circle cx="220" cy="40" r="7" fill="#00FFD1"/>
+              <circle cx="220" cy="40" r="12" fill="none" stroke="#00FFD1" stroke-width="1.5" opacity=".5"/>
+              <circle cx="220" cy="40" r="18" fill="none" stroke="#00FFD1" stroke-width="1" opacity=".2"/>
+              <!-- ponto de alerta de hidratação -->
+              <circle cx="130" cy="90" r="5" fill="#7B5CF6"/>
+              <text x="136" y="86" fill="#A78BFA" font-size="7" font-family="sans-serif">💧</text>
+              <!-- elevação lateral -->
+              <rect x="0" y="155" width="260" height="25" fill="rgba(0,0,0,.4)"/>
+              <path d="M 0 175 Q 40 160 80 165 Q 120 168 160 155 Q 200 145 260 158 L 260 180 L 0 180 Z" fill="rgba(0,255,209,.15)"/>
+              <path d="M 0 175 Q 40 160 80 165 Q 120 168 160 155 Q 200 145 260 158" stroke="#00FFD1" stroke-width="1" fill="none" opacity=".6"/>
+            </svg>
+          </div>
+
+          <!-- chips de dados -->
+          <div class="data-strip">
+            <div class="data-chip"><div class="dc-val">4.2</div><div class="dc-lab">km</div></div>
+            <div class="data-chip"><div class="dc-val">312</div><div class="dc-lab">kcal</div></div>
+            <div class="data-chip"><div class="dc-val">28°</div><div class="dc-lab">temp</div></div>
+          </div>
+
+          <!-- barra de hidratação -->
+          <div class="hydro-bar-wrap">
+            <div class="hydro-label"><span>Hidratação</span><span style="color:var(--c)">680 / 1000ml</span></div>
+            <div class="hydro-bar"><div class="hydro-fill"></div></div>
+          </div>
+
+          <!-- alerta inteligente -->
+          <div class="alert-chip">
+            <div class="alert-dot"></div>
+            <div class="alert-txt">Próxima subida detectada — beba <strong style="color:var(--c)">200ml</strong> agora</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── DIFERENCIAIS ── -->
+<div class="diff-bg reveal" id="diferencial">
+  <div class="diff-inner">
+    <div class="section-tag">Por que ROUTH2O</div>
+    <h2>Não é mais<br>um app de saúde</h2>
+    <div class="diff-grid">
+      <div class="diff-card positive">
+        <div class="diff-card-title" style="color:var(--c)">ROUTH2O <span class="badge badge-pos">Ecossistema</span></div>
+        <div class="comp-item"><div class="ci-icon ci-yes">✓</div><span>Correlação direta entre terreno e metabolismo</span></div>
+        <div class="comp-item"><div class="ci-icon ci-yes">✓</div><span>Hidratação dinâmica — muda conforme a rota muda</span></div>
+        <div class="comp-item"><div class="ci-icon ci-yes">✓</div><span>GPS integrado com perfil biométrico individual</span></div>
+        <div class="comp-item"><div class="ci-icon ci-yes">✓</div><span>Alertas contextuais: hora certa, quantidade certa</span></div>
+        <div class="comp-item"><div class="ci-icon ci-yes">✓</div><span>Modelo de IA que aprende e evolui com você</span></div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-card-title" style="color:var(--muted)">Apps comuns <span class="badge badge-neg">Genérico</span></div>
+        <div class="comp-item"><div class="ci-icon ci-no">✗</div><span>Contagem de passos sem contexto metabólico</span></div>
+        <div class="comp-item"><div class="ci-icon ci-no">✗</div><span>Lembretes fixos sem considerar a rota</span></div>
+        <div class="comp-item"><div class="ci-icon ci-no">✗</div><span>GPS separado dos dados de saúde</span></div>
+        <div class="comp-item"><div class="ci-icon ci-no">✗</div><span>Recomendações genéricas baseadas em médias</span></div>
+        <div class="comp-item"><div class="ci-icon ci-no">✗</div><span>Experiência estática que nunca muda</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CTA ── -->
+<div class="cta-wrap reveal">
+  <h2>Pronto para se mover<br><span class="g1">com inteligência?</span></h2>
+  <p>Entre na lista de acesso antecipado e seja um dos primeiros a experimentar o futuro da saúde integrada.</p>
+  <div class="cta-email">
+    <input type="email" placeholder="seu@email.com">
+    <button class="btn-primary">Garantir minha vaga</button>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="foot-logo">ROUTH2O</div>
+  <p class="foot-copy">Ecossistema de saúde integrada · GPS + Bio-Rastreamento</p>
+  <div class="foot-links">
+    <a href="#">Privacidade</a>
+    <a href="#">Termos</a>
+    <a href="#">Contato</a>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)} })
+}, {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+document.querySelectorAll('.btn-primary').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Registrado!';
+    btn.disabled = true;
+    setTimeout(() => { btn.textContent = orig; btn.disabled = false }, 2500);
+  });
+});
+
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').classList.toggle('scrolled', scrollY > 50);
+});
+</script>
+</body>
+</html>
