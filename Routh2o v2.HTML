@@ -21,7 +21,8 @@ html{scroll-behavior:smooth}
 body{background:var(--navy);color:var(--txt);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(3,13,24,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,255,209,.1)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(3,13,24,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,255,209,.1);transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.5)}
 .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:.1em;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{text-decoration:none;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:color .2s}
@@ -31,46 +32,40 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* ── HERO ── */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding:9rem 3rem 5rem;overflow:hidden}
-
-/* fundo animado */
 .hero-bg{position:absolute;inset:0;overflow:hidden}
-.hero-bg canvas{position:absolute;inset:0;width:100%;height:100%}
 .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;animation:orbFloat 8s ease-in-out infinite}
 .orb1{width:600px;height:600px;background:radial-gradient(circle,#00FFD1,transparent);top:-100px;left:-150px;animation-delay:0s}
 .orb2{width:500px;height:500px;background:radial-gradient(circle,#7B5CF6,transparent);bottom:-80px;right:-100px;animation-delay:-3s}
 .orb3{width:350px;height:350px;background:radial-gradient(circle,#FF6B35,transparent);top:40%;left:60%;animation-delay:-5s}
 @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-30px) scale(1.08)}}
-
-/* grade */
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,209,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,209,.06) 1px,transparent 1px);background-size:50px 50px;animation:gridScroll 25s linear infinite}
 @keyframes gridScroll{0%{transform:translateY(0)}100%{transform:translateY(50px)}}
-
 .hero-inner{max-width:800px;text-align:center;position:relative;z-index:2}
 .hero-badge{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(0,255,209,.35);background:rgba(0,255,209,.08);padding:.4rem 1.1rem;border-radius:2rem;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--c);margin-bottom:2rem;animation:fadeUp .7s ease both}
 .hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--c);animation:blink 1.5s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-
 h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3.2rem,9vw,7rem);line-height:.92;letter-spacing:-.03em;color:var(--white);margin-bottom:1.5rem;animation:fadeUp .7s .1s ease both}
 h1 .g1{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 h1 .sub{font-weight:300;font-style:italic;font-size:.45em;display:block;color:var(--muted);letter-spacing:.04em;margin-top:.3rem}
-
 .hero-desc{max-width:540px;margin:0 auto 2.5rem;font-size:1.1rem;line-height:1.8;color:var(--muted);animation:fadeUp .7s .2s ease both}
-
 .hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .7s .3s ease both}
 .btn-primary{background:var(--grad1);border:none;padding:1rem 2.4rem;border-radius:2rem;font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:.06em;cursor:pointer;color:#030D18;transition:all .25s;box-shadow:0 0 30px rgba(0,255,209,.25)}
 .btn-primary:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(0,255,209,.4)}
 .btn-ghost{background:transparent;color:var(--txt);border:1px solid rgba(200,236,245,.2);padding:1rem 2.4rem;border-radius:2rem;font-family:'Syne',sans-serif;font-size:.9rem;letter-spacing:.06em;cursor:pointer;transition:all .25s}
 .btn-ghost:hover{border-color:var(--c);color:var(--c);box-shadow:0 0 20px rgba(0,255,209,.15)}
-
-/* hero ilustração */
 .hero-visual{position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:380px;opacity:.25;z-index:1;animation:floatY 6s ease-in-out infinite}
 @keyframes floatY{0%,100%{transform:translateY(-50%) translateX(0)}50%{transform:translateY(calc(-50% - 20px)) translateX(-10px)}}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── STRIP DE MÉTRICAS ── */
+/* hero email input */
+.cta-email{display:flex;gap:.6rem;max-width:440px;margin:0 auto 1.5rem;animation:fadeUp .7s .25s ease both}
+.cta-email input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(0,255,209,.2);border-radius:2rem;padding:.9rem 1.5rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s,box-shadow .2s}
+.cta-email input::placeholder{color:var(--muted)}
+.cta-email input:focus{border-color:var(--c);box-shadow:0 0 0 3px rgba(0,255,209,.1)}
+
+/* ── MÉTRICAS ── */
 .metrics{display:grid;grid-template-columns:repeat(4,1fr);background:var(--navy2);border-top:1px solid rgba(0,255,209,.12);border-bottom:1px solid rgba(0,255,209,.12)}
-.metric{padding:2.2rem 1.5rem;text-align:center;border-right:1px solid rgba(0,255,209,.08);position:relative;overflow:hidden;transition:background .3s}
+.metric{padding:2.2rem 1.5rem;text-align:center;border-right:1px solid rgba(0,255,209,.08);position:relative;overflow:hidden;transition:background .3s;cursor:default}
 .metric:last-child{border-right:none}
 .metric:hover{background:rgba(0,255,209,.04)}
 .metric::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--grad1);transform:scaleX(0);transition:transform .4s;transform-origin:left}
@@ -89,8 +84,6 @@ h2 .g2{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-co
 /* ── ECOSSISTEMA ── */
 .eco-wrap{background:var(--navy2);border:1px solid rgba(0,255,209,.12);border-radius:2rem;padding:4rem;margin-top:4rem;position:relative;overflow:hidden}
 .eco-wrap::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(0,255,209,.07) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
-
-/* ilustrações SVG inline no ecossistema */
 .eco-layout{display:grid;grid-template-columns:1fr 200px 1fr;gap:3rem;align-items:center;position:relative;z-index:2}
 .eco-col{display:flex;flex-direction:column;gap:1.5rem}
 .eco-card{background:var(--navy3);border:1px solid rgba(0,255,209,.1);border-radius:1.2rem;padding:1.5rem;transition:all .3s;position:relative;overflow:hidden}
@@ -102,10 +95,8 @@ h2 .g2{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-co
 .eco-icon-temp{background:linear-gradient(135deg,#FF6B35,#FF3CAC)}
 .eco-icon-drop{background:linear-gradient(135deg,#0077FF,#7B5CF6)}
 .eco-icon-bio{background:linear-gradient(135deg,#7B5CF6,#FF3CAC)}
-.eco-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:.4rem}
-.eco-card p{font-size:.83rem;color:var(--muted);line-height:1.65}
-
-/* núcleo central */
+.eco-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:.4rem;position:relative;z-index:1}
+.eco-card p{font-size:.83rem;color:var(--muted);line-height:1.65;position:relative;z-index:1}
 .eco-core-wrap{display:flex;flex-direction:column;align-items:center;gap:1rem;position:relative}
 .core-ring{width:140px;height:140px;border-radius:50%;border:2px solid var(--c);display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative;animation:pulsRing 3s ease-in-out infinite}
 .core-ring::before,.core-ring::after{content:'';position:absolute;border-radius:50%;border:1px solid rgba(0,255,209,.2);animation:expandRing 3s ease-in-out infinite}
@@ -125,10 +116,8 @@ h2 .g2{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-co
 .step-pill{display:inline-block;background:rgba(0,255,209,.1);border:1px solid rgba(0,255,209,.2);color:var(--c);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:.25rem .8rem;border-radius:2rem;margin-bottom:1rem}
 .how-card h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:.7rem}
 .how-card p{font-size:.85rem;color:var(--muted);line-height:1.7}
-/* linha conectora entre steps */
-.how-connector{display:flex;align-items:center;justify-content:center;padding-top:5rem;color:rgba(0,255,209,.2);font-size:1.8rem}
 
-/* ── SEÇÃO VISUAL / ILUSTRAÇÃO ── */
+/* ── APP VISUAL ── */
 .visual-section{background:var(--navy2);padding:7rem 3rem;position:relative;overflow:hidden}
 .visual-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(0,255,209,.06) 0%,transparent 60%)}
 .visual-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
@@ -139,19 +128,14 @@ h2 .g2{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-co
 .fi{width:22px;height:22px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;margin-top:1px}
 .fi-c{background:var(--c);color:#030D18}
 .visual-img{position:relative;z-index:2}
-
-/* ── APP MOCKUP ── */
 .phone-frame{width:300px;height:560px;background:var(--navy3);border-radius:3rem;border:2px solid rgba(0,255,209,.2);position:relative;overflow:hidden;margin:0 auto;box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 60px rgba(0,255,209,.1)}
-.phone-notch{width:100px;height:28px;background:var(--navy);border-radius:0 0 1rem 1rem;position:absolute;top:0;left:50%;transform:translateX(-50%)}
+.phone-notch{width:100px;height:28px;background:var(--navy);border-radius:0 0 1rem 1rem;position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:2}
 .phone-screen{padding:2.5rem 1.2rem 1.2rem;height:100%;display:flex;flex-direction:column;gap:.8rem}
 .phone-header{display:flex;justify-content:space-between;align-items:center}
 .phone-logo{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .phone-status{font-size:.65rem;color:var(--c);letter-spacing:.1em}
 .map-area{background:var(--navy4);border-radius:1rem;flex:1;position:relative;overflow:hidden}
-
-/* mapa simulado com SVG inline */
 .map-svg{width:100%;height:100%}
-
 .data-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem}
 .data-chip{background:var(--navy4);border-radius:.8rem;padding:.6rem .5rem;text-align:center;border:1px solid rgba(0,255,209,.08)}
 .dc-val{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--c)}
@@ -188,11 +172,7 @@ h2 .g2{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-co
 .cta-wrap::after{content:'';position:absolute;width:600px;height:400px;background:radial-gradient(ellipse,rgba(123,92,246,.07) 0%,transparent 65%);top:40%;left:30%;transform:translate(-50%,-50%);pointer-events:none}
 .cta-wrap h2{position:relative;z-index:2;font-size:clamp(2.6rem,6vw,5rem)}
 .cta-wrap p{color:var(--muted);max-width:480px;margin:1.5rem auto 3rem;font-size:1.05rem;line-height:1.75;position:relative;z-index:2}
-.cta-wrap .hero-actions{position:relative;z-index:2}
-.cta-email{display:flex;gap:.6rem;max-width:440px;margin:0 auto 2rem;position:relative;z-index:2}
-.cta-email input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(0,255,209,.2);border-radius:2rem;padding:.9rem 1.5rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s}
-.cta-email input::placeholder{color:var(--muted)}
-.cta-email input:focus{border-color:var(--c)}
+.cta-wrap .cta-email{position:relative;z-index:2}
 
 /* ── FOOTER ── */
 footer{border-top:1px solid rgba(0,255,209,.08);padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
@@ -248,30 +228,23 @@ footer{border-top:1px solid rgba(0,255,209,.08);padding:2.5rem 3rem;display:flex
     <div class="orb orb3"></div>
   </div>
 
-  <!-- ilustração decorativa (runner + GPS) -->
   <div class="hero-visual" aria-hidden="true">
     <svg viewBox="0 0 300 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- corpo do runner estilizado -->
       <circle cx="150" cy="80" r="30" fill="none" stroke="#00FFD1" stroke-width="2"/>
       <line x1="150" y1="110" x2="150" y2="240" stroke="#00FFD1" stroke-width="2"/>
       <line x1="150" y1="150" x2="100" y2="200" stroke="#00FFD1" stroke-width="2"/>
       <line x1="150" y1="150" x2="200" y2="180" stroke="#7B5CF6" stroke-width="2"/>
       <line x1="150" y1="240" x2="110" y2="320" stroke="#00FFD1" stroke-width="2"/>
       <line x1="150" y1="240" x2="185" y2="330" stroke="#7B5CF6" stroke-width="2"/>
-      <!-- ondas de sinal GPS -->
       <circle cx="150" cy="80" r="55" fill="none" stroke="rgba(0,255,209,.25)" stroke-width="1" stroke-dasharray="4 6"/>
       <circle cx="150" cy="80" r="85" fill="none" stroke="rgba(0,255,209,.12)" stroke-width="1" stroke-dasharray="4 8"/>
       <circle cx="150" cy="80" r="115" fill="none" stroke="rgba(123,92,246,.1)" stroke-width="1" stroke-dasharray="3 10"/>
-      <!-- ponto GPS -->
       <circle cx="150" cy="80" r="8" fill="#00FFD1" opacity=".9"/>
       <circle cx="150" cy="80" r="4" fill="#030D18"/>
-      <!-- gotas de hidratação -->
       <ellipse cx="60" cy="260" rx="14" ry="20" fill="rgba(0,119,255,.4)" stroke="#0077FF" stroke-width="1"/>
       <ellipse cx="240" cy="300" rx="10" ry="15" fill="rgba(0,255,209,.25)" stroke="#00FFD1" stroke-width="1"/>
       <ellipse cx="80" cy="380" rx="8" ry="12" fill="rgba(123,92,246,.3)" stroke="#7B5CF6" stroke-width="1"/>
-      <!-- rota no chão -->
       <path d="M 50 450 Q 150 380 250 420 Q 280 440 250 470" stroke="rgba(0,255,209,.3)" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
-      <!-- pontos de rota -->
       <circle cx="50" cy="450" r="5" fill="#00FFD1" opacity=".7"/>
       <circle cx="150" cy="390" r="4" fill="#7B5CF6" opacity=".7"/>
       <circle cx="250" cy="420" r="5" fill="#FF6B35" opacity=".7"/>
@@ -283,11 +256,11 @@ footer{border-top:1px solid rgba(0,255,209,.08);padding:2.5rem 3rem;display:flex
     <h1>ROUTH<span class="g1">2O</span><span class="sub">Saúde que move com você</span></h1>
     <p class="hero-desc">O único ecossistema que une monitoramento geográfico com bio-rastreamento — correlacionando em tempo real o terreno que você percorre com a necessidade metabólica do seu corpo.</p>
     <div class="cta-email">
-      <input type="email" placeholder="seu@email.com">
-      <button class="btn-primary">Entrar na lista</button>
+      <input type="email" id="hero-email" placeholder="seu@email.com">
+      <button class="btn-primary" id="hero-btn">Entrar na lista</button>
     </div>
     <div class="hero-actions">
-      <button class="btn-ghost">Ver como funciona →</button>
+      <button class="btn-ghost" id="ver-como">Ver como funciona →</button>
     </div>
   </div>
 </div>
@@ -305,10 +278,8 @@ footer{border-top:1px solid rgba(0,255,209,.08);padding:2.5rem 3rem;display:flex
   <div class="section-tag">Ecossistema integrado</div>
   <h2>Dois mundos,<br><span class="g1">uma inteligência</span></h2>
   <p style="color:var(--muted);max-width:520px;line-height:1.8;margin-bottom:0">Não é um app de hidratação. Não é um rastreador de rota. É a ponte entre os dois — criando uma linguagem única entre seu corpo e o terreno.</p>
-
   <div class="eco-wrap">
     <div class="eco-layout">
-      <!-- col esquerda: inputs GPS -->
       <div class="eco-col">
         <div class="eco-card">
           <div class="eco-icon eco-icon-gps">
@@ -325,8 +296,6 @@ footer{border-top:1px solid rgba(0,255,209,.08);padding:2.5rem 3rem;display:flex
           <p>Temperatura e umidade integradas ao cálculo de perda hídrica a cada momento.</p>
         </div>
       </div>
-
-      <!-- núcleo -->
       <div class="eco-core-wrap">
         <div class="eco-arrow">⟵</div>
         <div class="core-ring">
@@ -335,8 +304,6 @@ footer{border-top:1px solid rgba(0,255,209,.08);padding:2.5rem 3rem;display:flex
         </div>
         <div class="eco-arrow">⟶</div>
       </div>
-
-      <!-- col direita: outputs saúde -->
       <div class="eco-col">
         <div class="eco-card">
           <div class="eco-icon eco-icon-drop">
@@ -405,7 +372,6 @@ footer{border-top:1px solid rgba(0,255,209,.08);padding:2.5rem 3rem;display:flex
       </ul>
     </div>
     <div class="visual-img">
-      <!-- mockup do celular -->
       <div class="phone-frame">
         <div class="phone-notch"></div>
         <div class="phone-screen">
@@ -413,53 +379,37 @@ footer{border-top:1px solid rgba(0,255,209,.08);padding:2.5rem 3rem;display:flex
             <span class="phone-logo">ROUTH2O</span>
             <span class="phone-status">● AO VIVO</span>
           </div>
-
-          <!-- mapa simulado -->
           <div class="map-area">
             <svg class="map-svg" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
-              <!-- fundo do mapa com quadrícula -->
               <rect width="260" height="180" fill="#0B2035"/>
-              <!-- ruas simuladas -->
               <line x1="0" y1="60" x2="260" y2="60" stroke="#0F2D47" stroke-width="8"/>
               <line x1="0" y1="120" x2="260" y2="120" stroke="#0F2D47" stroke-width="6"/>
               <line x1="80" y1="0" x2="80" y2="180" stroke="#0F2D47" stroke-width="6"/>
               <line x1="180" y1="0" x2="180" y2="180" stroke="#0F2D47" stroke-width="8"/>
               <line x1="130" y1="0" x2="130" y2="180" stroke="#0F2D47" stroke-width="4"/>
-              <!-- rota percorrida -->
               <path d="M 30 150 Q 60 140 80 120 Q 100 100 130 90 Q 160 80 180 60 Q 200 45 220 40" stroke="#00FFD1" stroke-width="3" fill="none" stroke-linecap="round"/>
-              <!-- rota futura (tracejada) -->
               <path d="M 220 40 Q 240 30 250 20" stroke="rgba(0,255,209,.4)" stroke-width="2" fill="none" stroke-dasharray="4 3" stroke-linecap="round"/>
-              <!-- ponto de início -->
               <circle cx="30" cy="150" r="6" fill="#FF6B35"/>
               <circle cx="30" cy="150" r="10" fill="none" stroke="#FF6B35" stroke-width="1" opacity=".5"/>
-              <!-- posição atual -->
               <circle cx="220" cy="40" r="7" fill="#00FFD1"/>
               <circle cx="220" cy="40" r="12" fill="none" stroke="#00FFD1" stroke-width="1.5" opacity=".5"/>
               <circle cx="220" cy="40" r="18" fill="none" stroke="#00FFD1" stroke-width="1" opacity=".2"/>
-              <!-- ponto de alerta de hidratação -->
               <circle cx="130" cy="90" r="5" fill="#7B5CF6"/>
               <text x="136" y="86" fill="#A78BFA" font-size="7" font-family="sans-serif">💧</text>
-              <!-- elevação lateral -->
               <rect x="0" y="155" width="260" height="25" fill="rgba(0,0,0,.4)"/>
               <path d="M 0 175 Q 40 160 80 165 Q 120 168 160 155 Q 200 145 260 158 L 260 180 L 0 180 Z" fill="rgba(0,255,209,.15)"/>
               <path d="M 0 175 Q 40 160 80 165 Q 120 168 160 155 Q 200 145 260 158" stroke="#00FFD1" stroke-width="1" fill="none" opacity=".6"/>
             </svg>
           </div>
-
-          <!-- chips de dados -->
           <div class="data-strip">
             <div class="data-chip"><div class="dc-val">4.2</div><div class="dc-lab">km</div></div>
             <div class="data-chip"><div class="dc-val">312</div><div class="dc-lab">kcal</div></div>
             <div class="data-chip"><div class="dc-val">28°</div><div class="dc-lab">temp</div></div>
           </div>
-
-          <!-- barra de hidratação -->
           <div class="hydro-bar-wrap">
             <div class="hydro-label"><span>Hidratação</span><span style="color:var(--c)">680 / 1000ml</span></div>
             <div class="hydro-bar"><div class="hydro-fill"></div></div>
           </div>
-
-          <!-- alerta inteligente -->
           <div class="alert-chip">
             <div class="alert-dot"></div>
             <div class="alert-txt">Próxima subida detectada — beba <strong style="color:var(--c)">200ml</strong> agora</div>
@@ -501,8 +451,8 @@ footer{border-top:1px solid rgba(0,255,209,.08);padding:2.5rem 3rem;display:flex
   <h2>Pronto para se mover<br><span class="g1">com inteligência?</span></h2>
   <p>Entre na lista de acesso antecipado e seja um dos primeiros a experimentar o futuro da saúde integrada.</p>
   <div class="cta-email">
-    <input type="email" placeholder="seu@email.com">
-    <button class="btn-primary">Garantir minha vaga</button>
+    <input type="email" id="cta-email-input" placeholder="seu@email.com">
+    <button class="btn-primary" id="cta-btn">Garantir minha vaga</button>
   </div>
 </div>
 
@@ -518,23 +468,654 @@ footer{border-top:1px solid rgba(0,255,209,.08);padding:2.5rem 3rem;display:flex
 </footer>
 
 <script>
+// ── Reveal on scroll ──
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)} })
 }, {threshold:.12});
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-document.querySelectorAll('.btn-primary').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const orig = btn.textContent;
-    btn.textContent = '✓ Registrado!';
-    btn.disabled = true;
-    setTimeout(() => { btn.textContent = orig; btn.disabled = false }, 2500);
-  });
-});
-
+// ── Nav shadow on scroll ──
 window.addEventListener('scroll', () => {
   document.querySelector('nav').classList.toggle('scrolled', scrollY > 50);
 });
+
+// ── Smooth scroll for nav links ──
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// ── "Ver como funciona" button ──
+document.getElementById('ver-como').addEventListener('click', () => {
+  document.querySelector('#ecosystem').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+// ── Nav CTA ──
+document.querySelector('.nav-cta').addEventListener('click', () => {
+  document.querySelector('.cta-wrap').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(() => { document.getElementById('cta-email-input').focus(); }, 700);
+});
+
+// ── Email validation helper ──
+function validarEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function mostrarErroEmail(input) {
+  input.style.borderColor = '#FF6B35';
+  input.style.boxShadow = '0 0 0 3px rgba(255,107,53,.15)';
+  const prev = input.placeholder;
+  input.placeholder = '⚠ Digite um e-mail válido!';
+  input.value = '';
+  setTimeout(() => {
+    input.style.borderColor = '';
+    input.style.boxShadow = '';
+    input.placeholder = 'seu@email.com';
+  }, 2500);
+}
+
+// ── Hero form ──
+document.getElementById('hero-btn').addEventListener('click', () => {
+  const input = document.getElementById('hero-email');
+  const email = input.value.trim();
+  if (!validarEmail(email)) { mostrarErroEmail(input); return; }
+  abrirApp(email);
+});
+
+document.getElementById('hero-email').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('hero-btn').click();
+});
+
+// ── CTA form ──
+document.getElementById('cta-btn').addEventListener('click', () => {
+  const input = document.getElementById('cta-email-input');
+  const email = input.value.trim();
+  if (!validarEmail(email)) { mostrarErroEmail(input); return; }
+  abrirApp(email);
+});
+
+document.getElementById('cta-email-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('cta-btn').click();
+});
+
+// ── Open app modal ──
+function abrirApp(email) {
+  const modal = document.getElementById('app-modal');
+  if (email) {
+    const slug = email.split('@')[0];
+    const nome = slug.charAt(0).toUpperCase() + slug.slice(1);
+    document.getElementById('app-username').textContent = nome;
+    document.getElementById('profile-name').textContent = nome;
+    document.getElementById('profile-avatar').textContent = nome.charAt(0).toUpperCase();
+  }
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // animate bar chart after modal opens
+  setTimeout(() => {
+    document.querySelectorAll('.bar-fill').forEach(b => b.style.height = b.dataset.h);
+  }, 450);
+  // ensure rota screen is active
+  showScreen('rota');
+}
+
+function fecharApp() {
+  document.getElementById('app-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  // if route is active, pause it when closing
+  if (rotaAtiva) toggleRota();
+}
+
+// ── Escape to close ──
+document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharApp(); });
+
+// ── Tab switching ──
+function showScreen(name) {
+  document.querySelectorAll('.app-tab').forEach(t => t.classList.toggle('active', t.dataset.screen === name));
+  document.querySelectorAll('.app-screen').forEach(s => s.classList.toggle('active', s.id === 'screen-' + name));
+}
+
+document.querySelectorAll('.app-tab').forEach(tab => {
+  tab.addEventListener('click', () => showScreen(tab.dataset.screen));
+});
+
+// ─────────────────────────────────────────────
+// ── ROTA LOGIC ──
+// ─────────────────────────────────────────────
+let rotaAtiva = false;
+let simInterval = null;
+let mapInterval = null;
+let tempoSegundos = 0;
+let timerInterval = null;
+
+// Route path points (pre-defined)
+const rotaPath = [
+  {x:30,y:140},{x:50,y:130},{x:70,y:118},{x:90,y:105},
+  {x:110,y:95},{x:130,y:82},{x:150,y:73},{x:170,y:65},
+  {x:190,y:56},{x:210,y:45},{x:230,y:36},{x:250,y:28},
+  {x:265,y:22},{x:275,y:18},{x:285,y:16}
+];
+
+let posIdx = 0; // current position along route
+
+function toggleRota() {
+  rotaAtiva = !rotaAtiva;
+  const btn = document.getElementById('btn-rota');
+  const statusEl = document.getElementById('rota-status');
+
+  if (rotaAtiva) {
+    // ── START ──
+    btn.innerHTML = '⏹ &nbsp;Pausar rota';
+    btn.style.background = 'linear-gradient(135deg,#FF6B35,#FF3CAC)';
+    btn.style.boxShadow = '0 8px 30px rgba(255,107,53,.3)';
+    statusEl.textContent = '● AO VIVO';
+    statusEl.style.color = 'var(--c)';
+    statusEl.style.animation = 'blink 1.5s ease-in-out infinite';
+
+    // show toast
+    showToast('🏃 Rota iniciada! Boa corrida!');
+
+    iniciarSimulacao();
+    iniciarTimer();
+    animarMapa();
+  } else {
+    // ── PAUSE ──
+    btn.innerHTML = '▶ &nbsp;Retomar rota';
+    btn.style.background = 'linear-gradient(135deg,#00FFD1,#7B5CF6)';
+    btn.style.boxShadow = '0 8px 30px rgba(0,255,209,.2)';
+    statusEl.textContent = '⏸ Pausado';
+    statusEl.style.color = 'var(--muted)';
+    statusEl.style.animation = 'none';
+
+    showToast('⏸ Rota pausada');
+    pararSimulacao();
+  }
+}
+
+document.getElementById('btn-rota').addEventListener('click', toggleRota);
+
+// ── Live data simulation ──
+let simKm = 0.0, simKcal = 0, simMl = 180;
+
+function iniciarSimulacao() {
+  simInterval = setInterval(() => {
+    simKm = +(simKm + (Math.random() * 0.04 + 0.01)).toFixed(2);
+    simKcal = Math.round(simKcal + Math.random() * 3 + 1);
+    simMl = Math.min(2000, Math.round(simMl + Math.random() * 6));
+
+    const pct = Math.min(100, (simMl / 2000) * 100);
+
+    const kmEl    = document.getElementById('sim-km');
+    const kcalEl  = document.getElementById('sim-kcal');
+    const mlEl    = document.getElementById('sim-ml');
+    const hydFill = document.getElementById('hyd-fill');
+    const hydLbl  = document.getElementById('hyd-label');
+
+    if (kmEl)    { kmEl.textContent    = simKm.toFixed(2); animateValue(kmEl); }
+    if (kcalEl)  { kcalEl.textContent  = simKcal; animateValue(kcalEl); }
+    if (mlEl)    { mlEl.textContent    = simMl; animateValue(mlEl); }
+    if (hydFill) hydFill.style.width   = pct + '%';
+    if (hydLbl)  hydLbl.textContent    = simMl + ' / 2000ml';
+
+    // hydration alert at milestones
+    if (simMl % 200 < 6) {
+      showToast('💧 Hora de beber água! +200ml recomendado.');
+    }
+  }, 1200);
+}
+
+function pararSimulacao() {
+  clearInterval(simInterval);
+  clearInterval(mapInterval);
+  clearInterval(timerInterval);
+  simInterval = null;
+  mapInterval = null;
+  timerInterval = null;
+}
+
+// ── Timer ──
+function iniciarTimer() {
+  timerInterval = setInterval(() => {
+    tempoSegundos++;
+    const min = String(Math.floor(tempoSegundos / 60)).padStart(2,'0');
+    const sec = String(tempoSegundos % 60).padStart(2,'0');
+    const el = document.getElementById('sim-tempo');
+    if (el) el.textContent = min + ':' + sec;
+  }, 1000);
+}
+
+// ── Animate value flash ──
+function animateValue(el) {
+  el.style.transition = 'color .15s';
+  el.style.color = '#fff';
+  setTimeout(() => { el.style.color = 'var(--c)'; }, 200);
+}
+
+// ── Map dot animation ──
+function animarMapa() {
+  mapInterval = setInterval(() => {
+    if (!rotaAtiva) { clearInterval(mapInterval); return; }
+    posIdx = (posIdx + 1) % rotaPath.length;
+    atualizarPontMapa();
+  }, 800);
+}
+
+function atualizarPontMapa() {
+  const pt = rotaPath[posIdx];
+  const dot  = document.getElementById('map-dot');
+  const ring1 = document.getElementById('map-ring1');
+  const ring2 = document.getElementById('map-ring2');
+  const trail = document.getElementById('map-trail');
+
+  if (!dot || !pt) return;
+
+  dot.setAttribute('cx', pt.x);
+  dot.setAttribute('cy', pt.y);
+  if (ring1) { ring1.setAttribute('cx', pt.x); ring1.setAttribute('cy', pt.y); }
+  if (ring2) { ring2.setAttribute('cx', pt.x); ring2.setAttribute('cy', pt.y); }
+
+  // update trail (percorrido até posição atual)
+  if (trail && posIdx > 0) {
+    const pts = rotaPath.slice(0, posIdx + 1);
+    const d = 'M ' + pts.map(p => p.x + ' ' + p.y).join(' L ');
+    trail.setAttribute('d', d);
+  }
+}
+
+// ── Toast notification ──
+function showToast(msg) {
+  const toast = document.getElementById('app-toast');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// ── Finish route button ──
+document.getElementById('btn-finalizar')?.addEventListener('click', () => {
+  if (!rotaAtiva && simKm === 0) return;
+
+  // Stop simulation
+  rotaAtiva = false;
+  pararSimulacao();
+
+  const btn = document.getElementById('btn-rota');
+  btn.innerHTML = '▶ &nbsp;Iniciar rota';
+  btn.style.background = 'linear-gradient(135deg,#00FFD1,#7B5CF6)';
+  btn.style.boxShadow = '0 8px 30px rgba(0,255,209,.2)';
+  document.getElementById('rota-status').textContent = '○ Pausado';
+  document.getElementById('rota-status').style.color = 'var(--muted)';
+
+  // Add to history
+  adicionarHistorico(simKm.toFixed(2), simKcal);
+
+  // Reset sim values
+  simKm = 0; simKcal = 0; simMl = 180; tempoSegundos = 0; posIdx = 0;
+  const kmEl = document.getElementById('sim-km'); if(kmEl) kmEl.textContent = '0.00';
+  const kcalEl = document.getElementById('sim-kcal'); if(kcalEl) kcalEl.textContent = '0';
+  const mlEl = document.getElementById('sim-ml'); if(mlEl) mlEl.textContent = '180';
+  const tempoEl = document.getElementById('sim-tempo'); if(tempoEl) tempoEl.textContent = '00:00';
+  const hydFill = document.getElementById('hyd-fill'); if(hydFill) hydFill.style.width = '9%';
+  const hydLbl = document.getElementById('hyd-label'); if(hydLbl) hydLbl.textContent = '180 / 2000ml';
+
+  // reset map dot
+  atualizarPontMapa();
+
+  showToast('🎉 Rota concluída! +' + simKm.toFixed(2) + 'km registrados.');
+  showScreen('historico');
+});
+
+// ── Add to history dynamically ──
+function adicionarHistorico(km, kcal) {
+  const now = new Date();
+  const hora = now.getHours() + 'h' + String(now.getMinutes()).padStart(2,'0');
+  const container = document.querySelector('#screen-historico .a-card:first-child');
+  if (!container) return;
+  const item = document.createElement('div');
+  item.className = 'hist-item';
+  item.style.animation = 'fadeUp .5s ease both';
+  item.innerHTML = `
+    <div class="hist-dot">🏃</div>
+    <div class="hist-info">
+      <div class="hist-title">Rota ao vivo</div>
+      <div class="hist-sub">Hoje · ${hora} · ${Math.round(Math.random()*6+24)}°C</div>
+    </div>
+    <div class="hist-badge">${km}km</div>`;
+  container.insertBefore(item, container.querySelector('.hist-item'));
+}
 </script>
+
+<!-- ══════════════════════════════════════════
+     MODAL — APP ROUTH2O
+══════════════════════════════════════════ -->
+<div id="app-modal" style="
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(3,13,24,.97);
+  backdrop-filter:blur(20px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .4s ease;
+  padding:1rem;
+">
+<style>
+#app-modal.open{opacity:1!important;pointer-events:all!important}
+#app-modal.open .app-window{transform:translateY(0)!important}
+.app-window{
+  width:100%;max-width:420px;
+  background:var(--navy2);
+  border-radius:2.5rem;
+  border:1px solid rgba(0,255,209,.2);
+  box-shadow:0 40px 120px rgba(0,0,0,.8),0 0 80px rgba(0,255,209,.08);
+  overflow:hidden;
+  transform:translateY(60px);
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+  max-height:92vh;
+  display:flex;flex-direction:column;
+}
+/* header */
+.app-header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.4rem 1.5rem 1rem;
+  border-bottom:1px solid rgba(0,255,209,.08);
+  flex-shrink:0;
+}
+.app-header-left{display:flex;flex-direction:column;gap:.2rem}
+.app-greeting{font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.app-username{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+#rota-status{font-size:.65rem;letter-spacing:.12em;color:var(--muted);transition:color .3s}
+.app-close{width:34px;height:34px;border-radius:50%;border:1px solid rgba(0,255,209,.2);background:transparent;color:var(--muted);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.app-close:hover{border-color:var(--c);color:var(--c)}
+/* tabs */
+.app-tabs{
+  display:flex;gap:0;
+  border-bottom:1px solid rgba(0,255,209,.08);
+  flex-shrink:0;
+}
+.app-tab{
+  flex:1;padding:.75rem .5rem;
+  background:transparent;border:none;
+  font-family:'Syne',sans-serif;font-size:.7rem;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:all .2s;
+}
+.app-tab.active{color:var(--c);border-bottom-color:var(--c)}
+.app-tab:hover:not(.active){color:var(--txt)}
+/* body */
+.app-body{overflow-y:auto;flex:1;padding:1.2rem 1.5rem 1.5rem}
+.app-body::-webkit-scrollbar{width:4px}
+.app-body::-webkit-scrollbar-track{background:transparent}
+.app-body::-webkit-scrollbar-thumb{background:rgba(0,255,209,.15);border-radius:2px}
+.app-screen{display:none}
+.app-screen.active{display:flex;flex-direction:column;gap:1rem}
+/* cards */
+.a-card{background:var(--navy3);border-radius:1.2rem;padding:1.1rem;border:1px solid rgba(0,255,209,.08)}
+.a-card-title{font-family:'Syne',sans-serif;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.8rem}
+/* live chips */
+.live-chips{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+.lc{background:var(--navy4);border-radius:.9rem;padding:.8rem .3rem;text-align:center;border:1px solid rgba(0,255,209,.07)}
+.lc-val{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--c);transition:color .2s}
+.lc-lab{font-size:.5rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:3px}
+/* hidratação */
+.hyd-row{display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted);margin-bottom:.5rem}
+.hyd-bar{height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
+#hyd-fill{height:100%;background:var(--grad1);border-radius:4px;transition:width 1.2s ease;width:9%}
+/* alerta */
+.a-alert{display:flex;align-items:center;gap:.7rem;background:linear-gradient(135deg,rgba(0,255,209,.1),rgba(123,92,246,.1));border:1px solid rgba(0,255,209,.2);border-radius:1rem;padding:.9rem}
+.a-alert-dot{width:8px;height:8px;border-radius:50%;background:var(--c);flex-shrink:0;animation:blink 1.5s ease-in-out infinite}
+.a-alert-txt{font-size:.78rem;color:var(--txt);line-height:1.4}
+/* botão rota */
+#btn-rota{
+  width:100%;padding:1rem;
+  border:none;border-radius:1rem;
+  background:linear-gradient(135deg,#00FFD1,#7B5CF6);
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:.9rem;letter-spacing:.06em;
+  color:#030D18;cursor:pointer;
+  transition:all .3s;
+  box-shadow:0 8px 30px rgba(0,255,209,.2);
+}
+#btn-rota:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,255,209,.3)}
+#btn-rota:active{transform:scale(.98)}
+/* finalizar rota */
+#btn-finalizar{
+  width:100%;padding:.8rem;
+  border:1px solid rgba(255,107,53,.3);border-radius:1rem;
+  background:rgba(255,107,53,.08);
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:.78rem;letter-spacing:.06em;
+  color:#FF6B35;cursor:pointer;
+  transition:all .3s;
+}
+#btn-finalizar:hover{background:rgba(255,107,53,.15);border-color:rgba(255,107,53,.5)}
+/* mapa app */
+.app-map-svg{width:100%;border-radius:.8rem;display:block}
+/* gráfico de barras */
+.bar-chart{display:flex;align-items:flex-end;gap:.5rem;height:80px;padding-top:.5rem}
+.bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:.4rem}
+.bar{width:100%;background:rgba(0,255,209,.1);border-radius:4px 4px 0 0;overflow:hidden;height:70px;display:flex;align-items:flex-end}
+.bar-fill{width:100%;background:var(--grad1);border-radius:4px 4px 0 0;transition:height 1s cubic-bezier(.22,1,.36,1);height:0}
+.bar-label{font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+/* histórico */
+.hist-item{display:flex;align-items:center;gap:.9rem;padding:.7rem 0;border-bottom:1px solid rgba(0,255,209,.05)}
+.hist-item:last-child{border-bottom:none}
+.hist-dot{width:36px;height:36px;border-radius:10px;background:var(--grad1);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.hist-info{flex:1}
+.hist-title{font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;color:var(--white)}
+.hist-sub{font-size:.7rem;color:var(--muted);margin-top:2px}
+.hist-badge{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;color:var(--c)}
+/* perfil */
+.profile-avatar{width:64px;height:64px;border-radius:50%;background:var(--grad1);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#030D18;margin:0 auto .8rem}
+.profile-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--white);text-align:center}
+.profile-sub{font-size:.75rem;color:var(--muted);text-align:center;margin-bottom:1rem}
+.stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem}
+.stat-box{background:var(--navy4);border-radius:.9rem;padding:.8rem .5rem;text-align:center;border:1px solid rgba(0,255,209,.07)}
+.stat-val{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--c)}
+.stat-lab{font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:3px}
+.pref-item{display:flex;justify-content:space-between;align-items:center;padding:.65rem 0;border-bottom:1px solid rgba(0,255,209,.05);font-size:.82rem;color:var(--txt)}
+.pref-item:last-child{border-bottom:none}
+.toggle{width:36px;height:20px;border-radius:10px;border:none;cursor:pointer;position:relative;transition:background .3s;background:var(--grad1)}
+.toggle::after{content:'';position:absolute;width:14px;height:14px;border-radius:50%;background:#030D18;top:3px;right:3px;transition:right .3s}
+.toggle.off{background:rgba(255,255,255,.1)}
+.toggle.off::after{right:calc(100% - 17px)}
+/* toast */
+#app-toast{
+  position:absolute;bottom:5rem;left:50%;transform:translateX(-50%) translateY(10px);
+  background:rgba(0,255,209,.12);border:1px solid rgba(0,255,209,.3);
+  color:var(--white);font-size:.75rem;
+  padding:.6rem 1.2rem;border-radius:2rem;
+  white-space:nowrap;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s,transform .3s;
+  z-index:10;
+  backdrop-filter:blur(10px);
+}
+#app-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* dot blink on map */
+@keyframes mapBlink{0%,100%{opacity:1;r:7px}50%{opacity:.7;r:5px}}
+/* @keyframes blink already defined globally */
+</style>
+
+<div class="app-window" style="position:relative">
+  <!-- header -->
+  <div class="app-header">
+    <div class="app-header-left">
+      <span class="app-greeting">Bem-vindo,</span>
+      <span class="app-username" id="app-username">Usuário</span>
+      <span id="rota-status">○ Pausado</span>
+    </div>
+    <button class="app-close" onclick="fecharApp()" title="Fechar">✕</button>
+  </div>
+
+  <!-- tabs -->
+  <div class="app-tabs">
+    <button class="app-tab active" data-screen="rota">🗺 Rota</button>
+    <button class="app-tab" data-screen="stats">📊 Stats</button>
+    <button class="app-tab" data-screen="historico">📋 Histórico</button>
+    <button class="app-tab" data-screen="perfil">👤 Perfil</button>
+  </div>
+
+  <!-- body -->
+  <div class="app-body">
+
+    <!-- ── TELA: ROTA ── -->
+    <div class="app-screen active" id="screen-rota">
+      <button id="btn-rota">▶ &nbsp;Iniciar rota</button>
+
+      <!-- mapa animado -->
+      <div class="a-card" style="padding:.8rem">
+        <svg id="app-map" viewBox="0 0 340 160" class="app-map-svg" xmlns="http://www.w3.org/2000/svg">
+          <rect width="340" height="160" fill="#0B2035" rx="8"/>
+          <!-- ruas -->
+          <line x1="0" y1="55" x2="340" y2="55" stroke="#0F2D47" stroke-width="8"/>
+          <line x1="0" y1="110" x2="340" y2="110" stroke="#0F2D47" stroke-width="5"/>
+          <line x1="90" y1="0" x2="90" y2="160" stroke="#0F2D47" stroke-width="6"/>
+          <line x1="220" y1="0" x2="220" y2="160" stroke="#0F2D47" stroke-width="8"/>
+          <line x1="155" y1="0" x2="155" y2="160" stroke="#0F2D47" stroke-width="3"/>
+          <!-- rota completa (fundo, tracejado) -->
+          <path d="M 30 140 Q 70 125 90 105 Q 115 85 155 75 Q 195 65 220 50 Q 255 35 285 16" stroke="rgba(0,255,209,.15)" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="6 4"/>
+          <!-- trilha percorrida (dinâmica) -->
+          <path id="map-trail" d="M 30 140" stroke="#00FFD1" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- ponto de início -->
+          <circle cx="30" cy="140" r="6" fill="#FF6B35"/>
+          <circle cx="30" cy="140" r="10" fill="none" stroke="#FF6B35" stroke-width="1" opacity=".5"/>
+          <!-- ponto de destino -->
+          <circle cx="285" cy="16" r="5" fill="#7B5CF6" opacity=".6"/>
+          <!-- ponto hidratação -->
+          <circle cx="155" cy="75" r="5" fill="#7B5CF6"/>
+          <text x="162" y="71" fill="#A78BFA" font-size="9" font-family="sans-serif">💧</text>
+          <!-- dot atual (animado via JS) -->
+          <circle id="map-dot" cx="30" cy="140" r="7" fill="#00FFD1"/>
+          <circle id="map-ring1" cx="30" cy="140" r="12" fill="none" stroke="#00FFD1" stroke-width="1.5" opacity=".5"/>
+          <circle id="map-ring2" cx="30" cy="140" r="18" fill="none" stroke="#00FFD1" stroke-width="1" opacity=".2"/>
+        </svg>
+      </div>
+
+      <!-- dados em tempo real: 4 chips -->
+      <div class="a-card">
+        <div class="a-card-title">Dados em tempo real</div>
+        <div class="live-chips">
+          <div class="lc"><div class="lc-val" id="sim-km">0.00</div><div class="lc-lab">km</div></div>
+          <div class="lc"><div class="lc-val" id="sim-kcal">0</div><div class="lc-lab">kcal</div></div>
+          <div class="lc"><div class="lc-val" id="sim-ml">180</div><div class="lc-lab">ml</div></div>
+          <div class="lc"><div class="lc-val" id="sim-tempo">00:00</div><div class="lc-lab">tempo</div></div>
+        </div>
+      </div>
+
+      <!-- hidratação -->
+      <div class="a-card">
+        <div class="a-card-title">Hidratação</div>
+        <div class="hyd-row"><span>Meta diária</span><span style="color:var(--c)" id="hyd-label">180 / 2000ml</span></div>
+        <div class="hyd-bar"><div id="hyd-fill"></div></div>
+      </div>
+
+      <!-- alerta -->
+      <div class="a-alert">
+        <div class="a-alert-dot"></div>
+        <div class="a-alert-txt">Inicie a rota para receber alertas de hidratação em tempo real</div>
+      </div>
+
+      <!-- botão finalizar -->
+      <button id="btn-finalizar">🏁 &nbsp;Finalizar rota e salvar</button>
+    </div>
+
+    <!-- ── TELA: STATS ── -->
+    <div class="app-screen" id="screen-stats">
+      <div class="a-card">
+        <div class="a-card-title">Hidratação — últimos 7 dias (ml)</div>
+        <div class="bar-chart">
+          <div class="bar-wrap"><div class="bar"><div class="bar-fill" data-h="55%"></div></div><div class="bar-label">Seg</div></div>
+          <div class="bar-wrap"><div class="bar"><div class="bar-fill" data-h="80%"></div></div><div class="bar-label">Ter</div></div>
+          <div class="bar-wrap"><div class="bar"><div class="bar-fill" data-h="65%"></div></div><div class="bar-label">Qua</div></div>
+          <div class="bar-wrap"><div class="bar"><div class="bar-fill" data-h="90%"></div></div><div class="bar-label">Qui</div></div>
+          <div class="bar-wrap"><div class="bar"><div class="bar-fill" data-h="45%"></div></div><div class="bar-label">Sex</div></div>
+          <div class="bar-wrap"><div class="bar"><div class="bar-fill" data-h="70%"></div></div><div class="bar-label">Sáb</div></div>
+          <div class="bar-wrap"><div class="bar"><div class="bar-fill" data-h="68%"></div></div><div class="bar-label">Dom</div></div>
+        </div>
+      </div>
+      <div class="a-card">
+        <div class="a-card-title">Resumo da semana</div>
+        <div class="stat-row">
+          <div class="stat-box"><div class="stat-val">28.4</div><div class="stat-lab">km totais</div></div>
+          <div class="stat-box"><div class="stat-val">5</div><div class="stat-lab">rotas</div></div>
+          <div class="stat-box"><div class="stat-val">4.8L</div><div class="stat-lab">água</div></div>
+        </div>
+      </div>
+      <div class="a-card">
+        <div class="a-card-title">Precisão do sistema</div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:.85rem;color:var(--txt)">Modelo personalizado</span>
+          <span style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--c)">94%</span>
+        </div>
+        <div style="margin-top:.6rem;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden">
+          <div style="height:100%;width:94%;background:var(--grad1);border-radius:3px"></div>
+        </div>
+        <div style="font-size:.7rem;color:var(--muted);margin-top:.5rem">Baseado nas suas últimas 12 rotas</div>
+      </div>
+    </div>
+
+    <!-- ── TELA: HISTÓRICO ── -->
+    <div class="app-screen" id="screen-historico">
+      <div class="a-card">
+        <div class="a-card-title">Rotas recentes</div>
+        <div class="hist-item">
+          <div class="hist-dot">🏃</div>
+          <div class="hist-info"><div class="hist-title">Parque da Cidade</div><div class="hist-sub">Hoje · 42min · 28°C</div></div>
+          <div class="hist-badge">4.2km</div>
+        </div>
+        <div class="hist-item">
+          <div class="hist-dot">🚴</div>
+          <div class="hist-info"><div class="hist-title">Ciclovias Sul</div><div class="hist-sub">Ontem · 1h12 · 31°C</div></div>
+          <div class="hist-badge">18.7km</div>
+        </div>
+        <div class="hist-item">
+          <div class="hist-dot">⛰️</div>
+          <div class="hist-info"><div class="hist-title">Trilha Morro Verde</div><div class="hist-sub">Sáb · 2h05 · 26°C</div></div>
+          <div class="hist-badge">9.1km</div>
+        </div>
+        <div class="hist-item">
+          <div class="hist-dot">🏃</div>
+          <div class="hist-info"><div class="hist-title">Orla do Lago</div><div class="hist-sub">Sex · 35min · 33°C</div></div>
+          <div class="hist-badge">5.6km</div>
+        </div>
+      </div>
+      <div class="a-alert">
+        <div class="a-alert-dot"></div>
+        <div class="a-alert-txt">Você está <strong style="color:var(--c)">12% mais hidratado</strong> que na semana passada. Continue assim!</div>
+      </div>
+    </div>
+
+    <!-- ── TELA: PERFIL ── -->
+    <div class="app-screen" id="screen-perfil">
+      <div class="a-card" style="text-align:center">
+        <div class="profile-avatar" id="profile-avatar">U</div>
+        <div class="profile-name" id="profile-name">Usuário</div>
+        <div class="profile-sub">Membro desde Abril 2025 · Plano Beta</div>
+        <div class="stat-row">
+          <div class="stat-box"><div class="stat-val">47</div><div class="stat-lab">rotas</div></div>
+          <div class="stat-box"><div class="stat-val">312km</div><div class="stat-lab">percorridos</div></div>
+          <div class="stat-box"><div class="stat-val">38L</div><div class="stat-lab">hidratação</div></div>
+        </div>
+      </div>
+      <div class="a-card">
+        <div class="a-card-title">Preferências</div>
+        <div class="pref-item"><span>Alertas de hidratação</span><button class="toggle" onclick="this.classList.toggle('off')"></button></div>
+        <div class="pref-item"><span>Modo noturno</span><button class="toggle off" onclick="this.classList.toggle('off')"></button></div>
+        <div class="pref-item"><span>Integrar wearable</span><button class="toggle" onclick="this.classList.toggle('off')"></button></div>
+        <div class="pref-item"><span>Compartilhar dados anônimos</span><button class="toggle off" onclick="this.classList.toggle('off')"></button></div>
+      </div>
+      <button onclick="fecharApp()" style="width:100%;padding:.9rem;border-radius:1rem;border:1px solid rgba(0,255,209,.2);background:transparent;color:var(--muted);font-family:'Syne',sans-serif;font-size:.82rem;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--c)';this.style.color='var(--c)'" onmouseout="this.style.borderColor='rgba(0,255,209,.2)';this.style.color='var(--muted)'">← Voltar ao site</button>
+    </div>
+
+  </div><!-- /app-body -->
+
+  <!-- toast notification -->
+  <div id="app-toast"></div>
+</div><!-- /app-window -->
+</div><!-- /app-modal -->
+
 </body>
 </html>
